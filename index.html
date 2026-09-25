@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>কাবাব ঘর - Kabab Ghor | Royal Charcoal & Grill</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Anek+Bangla:wght@600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        espresso: '#1a1412',
+                        'espresso-card': '#241c19',
+                        'espresso-light': '#2d231f',
+                        ivory: '#f8f4e9',
+                        'ivory-muted': '#c9bfae',
+                        gold: '#d97706',
+                        'gold-light': '#fbbf24',
+                        'gold-dark': '#b45309',
+                        saffron: '#ea580c',
+                        terracotta: '#9a3412',
+                    },
+                    fontFamily: {
+                        bengali: ['Hind Siliguri', 'sans-serif'],
+                        bengaliLuxury: ['Anek Bangla', 'sans-serif'],
+                        heading: ['Cinzel', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+
+        /* ─── Custom Scrollbar ─── */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1a1412; }
+        ::-webkit-scrollbar-thumb { background: #b45309; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #d97706; }
+
+        /* ─── PowerPoint-Style 2D Slide Transition Overlay ─── */
+        #slide-transition-overlay {
+            position: fixed;
+            inset: 0;
+            background: #1a1412;
+            z-index: 100;
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(100%);
+            transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease;
+        }
+
+        #slide-transition-overlay.active {
+            opacity: 1;
+            transform: translateY(0%);
+        }
+
+        /* ─── Flame Button Container ─── */
+        .flame-btn-wrap {
+            position: absolute;
+            left: 50%;
+            top: 79%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        /* ─── Flame Orb Base ─── */
+        .flame {
+            position: absolute;
+            width: 130px;
+            height: 160px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            filter: blur(28px);
+            opacity: 0;
+            animation: flame-flicker 2s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        .flame-1 {
+            background: radial-gradient(ellipse at 50% 80%, #f59e0b, #ea580c 50%, transparent 80%);
+            animation-delay: 0s;
+            z-index: 1;
+        }
+        .flame-2 {
+            background: radial-gradient(ellipse at 50% 80%, #fbbf24, #dc2626 50%, transparent 80%);
+            animation-delay: 0.3s;
+            filter: blur(22px);
+            z-index: 2;
+        }
+        .flame-3 {
+            background: radial-gradient(ellipse at 50% 80%, #f97316, #b45309 50%, transparent 80%);
+            animation-delay: 0.6s;
+            filter: blur(36px);
+            z-index: 0;
+        }
+
+        @keyframes flame-flicker {
+            0% { opacity: 0.6; transform: scaleY(1) scaleX(1) translateY(0); }
+            25% { opacity: 0.85; transform: scaleY(1.08) scaleX(0.95) translateY(-8px); }
+            50% { opacity: 0.55; transform: scaleY(0.95) scaleX(1.05) translateY(4px); }
+            75% { opacity: 0.9; transform: scaleY(1.12) scaleX(0.92) translateY(-12px); }
+            100% { opacity: 0.6; transform: scaleY(1) scaleX(1) translateY(0); }
+        }
+
+        /* ─── Luxury Button ─── */
+        .luxury-button {
+            position: relative;
+            z-index: 10;
+            background-color: rgba(180, 83, 9, 0.2);
+            border: 1px solid rgba(217, 119, 6, 0.8);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px -10px rgba(217, 119, 6, 0.3);
+            cursor: pointer;
+        }
+        .luxury-button:hover {
+            background-color: rgba(217, 119, 6, 0.9);
+            color: #ffffff;
+            border-color: #fbbf24;
+            box-shadow: 0 0 25px rgba(251, 191, 36, 0.6);
+            transform: translateY(-2px);
+        }
+        .luxury-button:active {
+            background-color: #991b1b !important;
+            border-color: #7f1d1d !important;
+            transform: translateY(1px);
+        }
+
+        /* Rich Brown Back Button for Menu Page */
+        .brown-back-button {
+            background-color: #2d1b10;
+            border: 1px solid rgba(217, 119, 6, 0.7);
+            color: #f8f4e9;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(45, 27, 16, 0.4);
+            cursor: pointer;
+        }
+        .brown-back-button:hover {
+            background-color: #422818;
+            border-color: #fbbf24;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(45, 27, 16, 0.6);
+        }
+
+        .gold-border-glow {
+            border: 1px solid rgba(217, 119, 6, 0.3);
+            transition: all 0.4s ease;
+        }
+        .gold-border-glow:hover {
+            border-color: rgba(251, 191, 36, 0.7);
+            box-shadow: 0 0 20px rgba(217, 119, 6, 0.2);
+        }
+
+        /* High-End Classy Metallic Gold Typography */
+        .bengali-classy-text {
+            font-family: 'Anek Bangla', sans-serif;
+            font-weight: 800;
+            background: linear-gradient(180deg, #ffffff 0%, #fde047 30%, #eab308 65%, #ca8a04 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.95));
+            letter-spacing: 0.03em;
+        }
+
+        .mughal-title {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.25em;
+            color: #b45309;
+            text-shadow: 0 2px 10px rgba(217, 119, 6, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-espresso text-ivory antialiased selection:bg-gold selection:text-espresso relative">
+
+    <!-- ─── 2D SLIDE TRANSITION OVERLAY ─── -->
+    <div id="slide-transition-overlay"></div>
+
+    <!-- ─── PERMANENT BASE BACKGROUND VIDEO ─── -->
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <video class="w-full h-full object-cover" autoplay loop muted playsinline src="assets/lv_0_20260904170206.mp4"></video>
+        <div class="absolute inset-0 bg-black/75 backdrop-blur-[2px]"></div>
+    </div>
+
+    <!-- ─── NAV BAR ─── -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-espresso/90 backdrop-blur-md border-b border-gold/20 py-3 px-6 md:px-12 flex items-center justify-between">
+        <a href="#" class="flex items-center gap-3 group">
+            <img src="assets/1787729429841.png" alt="Logo" class="h-10 w-10 object-contain transition-transform duration-300 group-hover:scale-110">
+            <span class="font-bengali text-2xl font-bold tracking-wide text-ivory group-hover:text-gold transition-colors">কাবাব ঘর</span>
+        </a>
+
+        <!-- Desktop Links -->
+        <div class="hidden md:flex items-center gap-8 font-sans text-sm tracking-widest uppercase text-ivory-muted">
+            <a href="#about" class="hover:text-gold transition-colors">Our Story</a>
+            <a href="#specialties" class="hover:text-gold transition-colors">Signature Dishes</a>
+            <button onclick="openFullMenu()" class="hover:text-gold transition-colors font-semibold text-gold-light">Full Menu</button>
+        </div>
+
+        <!-- Action Button -->
+        <div class="flex items-center gap-4">
+            <button onclick="openFullMenu()" class="hidden sm:inline-block border border-gold/70 text-gold hover:bg-gold hover:text-espresso px-5 py-2 text-xs uppercase tracking-widest transition-all duration-300 rounded-sm font-semibold">
+                Explore Menu
+            </button>
+            <button id="mobile-menu-btn" class="md:hidden text-ivory hover:text-gold focus:outline-none p-2" aria-label="Toggle menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Dropdown -->
+    <div id="mobile-menu" class="fixed inset-x-0 top-[60px] z-40 bg-espresso-card/95 backdrop-blur-xl border-b border-gold/30 p-6 hidden md:hidden flex-col gap-4 font-sans text-center tracking-widest uppercase text-sm">
+        <a href="#about" class="py-2 text-ivory hover:text-gold" onclick="toggleMobileMenu()">Our Story</a>
+        <a href="#specialties" class="py-2 text-ivory hover:text-gold" onclick="toggleMobileMenu()">Signature Dishes</a>
+        <button onclick="openFullMenu(); toggleMobileMenu();" class="py-2 text-gold font-bold">Full Menu</button>
+    </div>
+
+    <!-- ─── HERO SECTION ─── -->
+    <section class="relative z-10 h-screen w-full flex items-center justify-center">
+        <div class="flex flex-col items-center justify-center h-full px-4">
+            <div class="relative w-[360px] sm:w-[404px] h-[360px] sm:h-[404px]">
+                <img src="assets/1787729429841.png" alt="কাবাব ঘর Logo" class="absolute inset-0 w-full h-full object-contain" />
+
+                <!-- Flame Button Group -->
+                <div class="flame-btn-wrap">
+                    <div class="flame flame-3"></div>
+                    <div class="flame flame-1"></div>
+                    <div class="flame flame-2"></div>
+                    <button onclick="openFullMenu()" class="luxury-button px-8 py-3 uppercase tracking-widest font-light text-xs sm:text-sm text-ivory/90 shadow-2xl backdrop-blur-sm rounded-sm inline-block text-center">
+                        View the Menu
+                    </button>
+                </div>
+            </div>
+
+            <div class="absolute bottom-10 left-0 right-0 text-center animate-bounce opacity-75">
+                <a href="#about" class="text-ivory-muted text-xs tracking-[0.3em] uppercase flex flex-col items-center gap-2 hover:text-gold transition-colors">
+                    <span>Scroll to Explore</span>
+                    <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── ABOUT SECTION ─── -->
+    <section id="about" class="relative z-10 py-24 px-6 md:px-16 bg-espresso/85 backdrop-blur-sm border-t border-gold/20">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            
+            <div class="space-y-6">
+                <!-- Elegant Title with Royal Accent Divider -->
+                <div class="space-y-3">
+                    <div class="flex items-center gap-3">
+                        <span class="h-[1px] w-12 bg-gradient-to-r from-transparent to-gold/70"></span>
+                        <span class="text-gold text-xs">❖</span>
+                        <span class="h-[1px] w-24 bg-gradient-to-l from-transparent to-gold/70"></span>
+                    </div>
+
+                    <h2 class="bengali-classy-text text-4xl sm:text-5xl lg:text-6xl py-2">
+                        আধুনিক বাংলার স্বাদ
+                    </h2>
+                </div>
+
+                <p class="font-heading text-xl italic text-gold-light/90 pt-1">
+                    "Where slow-burning charcoal transforms tender spices into culinary poetry."
+                </p>
+
+                <p class="text-ivory-muted leading-relaxed font-sans text-sm sm:text-base font-light">
+                    At <strong class="text-ivory font-normal">কাবাব ঘর (Kabab Ghor)</strong>, every dish carries centuries of secret recipes passed down through master grill ustads. We infuse authentic Bengali aromatics with classic Mughlai charcoal techniques to deliver a sensory feast that warms both palate and soul.
+                </p>
+
+                <div class="grid grid-cols-3 gap-6 pt-6 border-t border-gold/20">
+                    <div>
+                        <span class="font-heading text-3xl font-bold text-gold block">100%</span>
+                        <span class="text-xs uppercase tracking-wider text-ivory-muted">Authentic Spice</span>
+                    </div>
+                    <div>
+                        <span class="font-heading text-3xl font-bold text-gold block">Charcoal</span>
+                        <span class="text-xs uppercase tracking-wider text-ivory-muted">Slow Grilled</span>
+                    </div>
+                    <div>
+                        <span class="font-heading text-3xl font-bold text-gold block">Royal</span>
+                        <span class="text-xs uppercase tracking-wider text-ivory-muted">Hospitality</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative flex justify-center">
+                <div class="relative w-full max-w-md aspect-[4/5] rounded-lg overflow-hidden gold-border-glow bg-espresso-card/90 p-3 shadow-2xl backdrop-blur-md">
+                    <div class="w-full h-full relative overflow-hidden rounded">
+                        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80" alt="Grill & Spices" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-espresso via-transparent to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 right-6 p-4 bg-espresso/90 backdrop-blur-md border border-gold/30 rounded">
+                            <p class="font-bengali text-lg text-gold font-semibold">আসল কয়লার আঁচ ও মশলার জাদু</p>
+                            <p class="text-xs text-ivory-muted">Flame, Smoke & Perfection</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ─── SIGNATURE DISHES ─── -->
+    <section id="specialties" class="relative z-10 py-24 px-6 md:px-16 bg-espresso/80 backdrop-blur-md border-y border-gold/20">
+        <div class="max-w-6xl mx-auto">
+            
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                <span class="text-gold text-xs uppercase tracking-[0.3em] font-semibold">House Favorites</span>
+                <h2 class="font-bengali text-4xl sm:text-5xl font-bold text-ivory">আমাদের সিগনেচার আইটেম</h2>
+                <p class="text-ivory-muted text-sm">handpicked delicacies marinated for 24 hours in aromatic spices and mustard oil</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Card 1: Reshmi Malai Tikka (₹170) -->
+                <div class="bg-espresso-card/90 border border-gold/20 rounded-lg p-6 hover:border-gold/60 transition-all duration-300 group flex flex-col justify-between shadow-2xl backdrop-blur-md">
+                    <div>
+                        <div class="w-full h-48 rounded overflow-hidden mb-5 relative">
+                            <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=600&q=80" alt="Reshmi Malai Tikka" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <span class="absolute top-3 right-3 bg-gold text-espresso font-bold text-xs px-3 py-1 rounded uppercase tracking-wider">Popular</span>
+                        </div>
+                        <div class="flex justify-between items-baseline mb-2">
+                            <h3 class="font-bengali text-2xl font-semibold text-ivory group-hover:text-gold transition-colors">রেশমি মালাই টিক্কা</h3>
+                            <span class="font-heading text-lg font-bold text-gold">₹170</span>
+                        </div>
+                        <p class="text-xs text-gold-light/80 uppercase tracking-widest mb-3">Reshmi Malai Tikka (6 Pcs)</p>
+                        <p class="text-xs text-ivory-muted leading-relaxed font-light">Succulent chicken chunks in rich cashew cream and white pepper marination, charcoal toasted.</p>
+                    </div>
+                </div>
+
+                <!-- Card 2: Hariyali Kabab (₹150) -->
+                <div class="bg-espresso-card/90 border border-gold/20 rounded-lg p-6 hover:border-gold/60 transition-all duration-300 group flex flex-col justify-between shadow-2xl backdrop-blur-md">
+                    <div>
+                        <div class="w-full h-48 rounded overflow-hidden mb-5 relative">
+                            <img src="assets/hariyali-kebab.jpg..jpg" 
+                                 onerror="this.onerror=null; this.src='assets/hariyali-kebab.jpg';" 
+                                 alt="Hariyali Kabab" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <span class="absolute top-3 right-3 bg-saffron text-ivory font-bold text-xs px-3 py-1 rounded uppercase tracking-wider">Chef Special</span>
+                        </div>
+                        <div class="flex justify-between items-baseline mb-2">
+                            <h3 class="font-bengali text-2xl font-semibold text-ivory group-hover:text-gold transition-colors">হারিয়ালি কাবাব</h3>
+                            <span class="font-heading text-lg font-bold text-gold">₹150</span>
+                        </div>
+                        <p class="text-xs text-gold-light/80 uppercase tracking-widest mb-3">Hariyali Kabab (6 Pcs)</p>
+                        <p class="text-xs text-ivory-muted leading-relaxed font-light">Fresh mint, coriander, ginger-garlic paste & lemon marinated tender chicken chunks cooked over clay oven.</p>
+                    </div>
+                </div>
+
+                <!-- Card 3: Full Chicken Roast (₹300) -->
+                <div class="bg-espresso-card/90 border border-gold/20 rounded-lg p-6 hover:border-gold/60 transition-all duration-300 group flex flex-col justify-between shadow-2xl backdrop-blur-md">
+                    <div>
+                        <div class="w-full h-48 rounded overflow-hidden mb-5 relative">
+                            <img src="assets/full-chicken-roast.jpg.jpg" 
+                                 onerror="this.onerror=null; this.src='assets/full-chicken-roast.jpg';" 
+                                 alt="Full Chicken Roast" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <span class="absolute top-3 right-3 bg-gold-dark text-ivory font-bold text-xs px-3 py-1 rounded uppercase tracking-wider">Royal Feast</span>
+                        </div>
+                        <div class="flex justify-between items-baseline mb-2">
+                            <h3 class="font-bengali text-2xl font-semibold text-ivory group-hover:text-gold transition-colors">সম্পূর্ণ চিকেন রোস্ট</h3>
+                            <span class="font-heading text-lg font-bold text-gold">₹300</span>
+                        </div>
+                        <p class="text-xs text-gold-light/80 uppercase tracking-widest mb-3">Full Chicken Roast (Whole)</p>
+                        <p class="text-xs text-ivory-muted leading-relaxed font-light">Whole chicken marinated in authentic Bengali spices and slow oven-roasted to golden perfection.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- View Full Menu Callout -->
+            <div class="text-center mt-12">
+                <button onclick="openFullMenu()" class="luxury-button px-10 py-3.5 uppercase tracking-widest text-xs font-semibold text-ivory rounded shadow-xl">
+                    Open Complete Royal Menu Page
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ─── FOOTER WITH CREATOR ATTRIBUTION ─── -->
+    <footer id="contact" class="relative z-10 bg-espresso/90 backdrop-blur-md border-t border-gold/20 pt-16 pb-8 px-6 md:px-16 text-ivory-muted text-xs">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+            <div class="space-y-4 md:col-span-1">
+                <div class="flex items-center gap-3">
+                    <img src="assets/1787729429841.png" alt="Logo" class="h-10 w-10 object-contain">
+                    <span class="font-bengali text-2xl font-bold text-ivory">কাবাব ঘর</span>
+                </div>
+                <p class="text-ivory-muted/80 leading-relaxed">Experience Bengal’s premier charcoal grill cafe & royal Mughlai dining experience.</p>
+            </div>
+
+            <!-- Opening Hours -->
+            <div>
+                <h4 class="font-heading text-sm uppercase tracking-widest text-gold mb-4 font-bold">Opening Hours</h4>
+                <p class="mb-1 text-ivory">Tuesday – Sunday:</p>
+                <p class="mb-2 text-gold-light font-semibold">6:00 PM – 10:30 PM</p>
+                <p class="text-xs text-red-400">Monday: Closed</p>
+            </div>
+
+            <!-- Location & Contact -->
+            <div>
+                <h4 class="font-heading text-sm uppercase tracking-widest text-gold mb-4 font-bold">Location & Contact</h4>
+                <p class="mb-2 text-ivory font-semibold">Phone:</p>
+                <p class="mb-1 text-gold-light font-mono">8100278529</p>
+                <p class="mb-3 text-gold-light font-mono">7980512724</p>
+                <a href="https://maps.app.goo.gl/qTxv8gPhjsaENCP37" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-gold hover:text-gold-light underline font-medium transition-colors">
+                    <span>📍 Find Us on Google Maps</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Creator Details at the Very End of Homepage -->
+        <div class="max-w-6xl mx-auto border-t border-gold/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-ivory-muted/70">
+            <p>© 2026 কাবাব ঘর (Kabab Ghor). All rights reserved.</p>
+            <div class="text-center sm:text-right space-y-1">
+                <p>Created by <strong class="text-gold font-semibold">Ando</strong></p>
+                <p>Email: <a href="mailto:aritrandohala@gmail.com" class="text-gold hover:underline">aritrandohala@gmail.com</a> | Instagram: <a href="https://www.instagram.com/haandi74?stkn=ZXR0cHprcmp1OTk1" target="_blank" class="text-gold hover:underline">@haandi74</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ─── DEDICATED ROYAL MENU PAGE OVERLAY ─── -->
+    <div id="full-menu-page" class="fixed inset-0 z-50 bg-[#fdfbf7] overflow-y-auto hidden text-espresso">
+        
+        <!-- Menu Page Background Image Overlay -->
+        <div class="fixed inset-0 z-0 pointer-events-none">
+            <img src="assets/1789803834409.jpg.png" onerror="this.onerror=null; this.src='assets/1789803834409.jpg';" alt="Menu Background" class="w-full h-full object-cover opacity-90">
+            <div class="absolute inset-0 bg-[#fdfbf7]/40"></div>
+        </div>
+
+        <!-- Menu Header Bar -->
+        <div class="sticky top-0 z-30 bg-[#1a1412]/95 backdrop-blur-md border-b border-gold/40 px-6 py-4 flex justify-between items-center max-w-6xl mx-auto text-ivory">
+            <div class="flex items-center gap-3">
+                <img src="assets/1787729429841.png" alt="Logo" class="h-10 w-10 object-contain">
+                <span class="font-bengali text-2xl font-bold text-ivory">কাবাব ঘর</span>
+            </div>
+            <button onclick="closeFullMenu()" class="border border-gold/60 text-gold hover:bg-gold hover:text-espresso px-5 py-2 text-xs uppercase tracking-widest transition-all rounded font-bold">
+                ✕ Back to Home
+            </button>
+        </div>
+
+        <!-- Menu Page Main Content -->
+        <div class="relative z-10 max-w-5xl mx-auto px-6 py-12">
+            
+            <!-- Royal Mughal Header -->
+            <div class="text-center space-y-3 mb-16 pt-8">
+                <div class="flex justify-center items-center gap-4">
+                    <span class="h-[1px] w-12 bg-gold-dark/60"></span>
+                    <span class="text-gold-dark text-xs uppercase tracking-[0.4em] font-bold">ROYAL SELECTION</span>
+                    <span class="h-[1px] w-12 bg-gold-dark/60"></span>
+                </div>
+                
+                <h1 class="mughal-title text-5xl sm:text-7xl font-bold">MENU</h1>
+                
+                <p class="font-bengali text-xl font-bold text-gold-dark">আসল কয়লার কাবাব ও তন্দুরি খাস খাবার</p>
+            </div>
+
+            <!-- MAIN KEBABS & SNACKS SECTION -->
+            <div class="mb-16">
+                <div class="flex items-center gap-3 mb-8 border-b-2 border-gold-dark/40 pb-3">
+                    <span class="text-gold-dark text-xl">✦</span>
+                    <h2 class="font-heading text-2xl sm:text-3xl font-bold text-[#2a1a08] tracking-wide">SPECIAL KEBABS & SNACKS</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    
+                    <!-- Item 1 -->
+                    <div class="bg-white/80 border border-gold-dark/30 p-4 rounded-lg flex items-center justify-between shadow-md hover:border-gold transition-all">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=150&q=80" class="w-14 h-14 object-cover rounded border border-gold/40">
+                            <div>
+                                <h3 class="font-bold text-[#1a1412] text-base">RESHMI KEBAB</h3>
+                                <span class="text-xs text-gold-dark font-semibold">6 PCS</span>
+                            </div>
+                        </div>
+                        <span class="font-heading text-lg font-bold text-gold-dark">₹150/-</span>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="bg-white/80 border border-gold-dark/30 p-4 rounded-lg flex items-center justify-between shadow-md hover:border-gold transition-all">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=150&q=80" class="w-14 h-14 object-cover rounded border border-gold/40">
+                            <div>
+                                <h3 class="font-bold text-[#1a1412] text-base">RESHMI CHEESE KEBAB</h3>
+                                <span class="text-xs text-gold-dark font-semibold">6 PCS</span>
+                            </div>
+                        </div>
+                        <span class="font-heading text-lg font-bold text-gold-dark">₹160/-</span>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="bg-white/80 border border-gold-dark/30 p-4 rounded-lg flex items-center justify-between shadow-md hover:border-gold transition-all">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=150&q=80" class="w-14 h-14 object-cover rounded border border-gold/40">
+                            <div>
+                                <h3 class="font-bold text-[#1a1412] text-base">RESHMI MALAI KEBAB</h3>
+                                <span class="text-xs text-gold-dark font-semibold">6 PCS</span>
+                            </div>
+                        </div>
+                        <span class="font-heading text-lg font-bold text-gold-dark">₹170/-</span>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="bg-white/80 border border-gold-dark/30 p-4 rounded-lg flex items-center justify-between shadow-md hover:border-gold transition-all">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=150&q=80" class="w-14 h-14 object-cover rounded border border-gold/40">
+                            <div>
+                                <h3 class="font-bold text-[#1a1412] text-base">RESHMI CHEESE MALAI KEBAB</h3>
+                                <span class="text-xs text-gold-dark font-semibold">6 PCS</span>
+                            </div>
+                        </div>
+                        <span class="font-heading text-lg font-bold text-gold-dark">₹185/-</span>
+                    </div>
+
+                    <!-- Item 5 -->
+                    <div class="bg-white/80 border border-gold-dark/30 p-4 rounded-lg flex items-center justify-between shadow-md hover:border-gold transition-all">
+                        <div class="flex items-center gap-4">
+                            <img src="assets/hariyali-kebab.jpg..jpg" onerror="this.onerror=null; this.src='assets/hariyali-kebab.jpg';" class="w-14 h-14 object-cover rounded border border-gold/40">
+                            <div>
+                                <h3 class="font-bold text-[#1a1412] text-base">HARIYALI KEBAB</h3>
+                                <span class="text-xs text-gold-dark font-semibold">6 PCS</span>
+                            </div>
+                        </div>
+                        <span class="font-heading text-lg font-bold text-gold-dark">₹140/-</span>
+                    </div>
+
+                    <!-- Item 6 -->
+                    <div class="bg-white/80 border border-gold-dark/30 p-4 rounded-lg flex items-center justify-between shadow-md hover:border-gold transition-all">
+                        <div class="flex items-center gap-4">
+                            <img src="assets/hariyali-kebab.jpg..jpg" onerror="this.onerror=null; this.src='assets/hariyali-kebab.jpg';" class="w-14 h-14 object-cover rounded border border-gold/40">
+                            <div>
+                                <h3 class="font-bold text-[#1a1412] text-base">COMBO KEBAB (RESHMI/PLAIN/HARIYALI)</h3>
+                                <span class="text-xs text-gold-dark font-semibold">6 PCS</span>
+                            </div>
+                        </div>
+                        <span class="font-heading text-lg font-bold text-gold-dark">₹140/-</span>
+                    </div>
+
+                    <!-- Item 7 -->
+                    <div class="bg-white/80 border border-gold-dark/30 p-4 rounded-lg flex items-center justify-between shadow-md hover:border-gold transition-all">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=150&q=80" class="w-14 h-14 object-cover rounded border border-gold/40">
+                            <div>
+                                <h3 class="font-bold text-[#1a1412] text-base">TIKKA KEBAB</h3>
+                                <span class="text-xs text-gold-dark font-semibold">6 PCS</span>
+                            </div>
+                        </div>
+                        <span class="font-heading text-lg font-bold text-gold-dark">₹140/-</span>
+                    </div>
+
+                    <!-- Item 8 -->
+                    <div class="bg-white/80 border border-gold-dark/30 p-4 rounded-lg flex items-center justify-between shadow-md hover:border-gold transition-all">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=150&q=80" class="w-14 h-14 object-cover rounded border border-gold/40">
+                            <div>
+                                <h3 class="font-bold text-[#1a1412] text-base">PLAIN TIKKA KEBAB</h3>
+                                <span class="text-xs text-gold-dark font-semibold">6 PCS</span>
+                            </div>
+                        </div>
+                        <span class="font-heading text-lg font-bold text-gold-dark">₹130/-</span>
+                    </div>
+
+                    <!-- Item 9 -->
+                    <div class="bg-white/80 border border-gold-dark/30 p-4 rounded-lg flex items-center justify-between shadow-md hover:border-gold transition-all">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=150&q=80" class="w-14 h-14 object-cover rounded border border-gold/40">
+                            <div>
+                                <h3 class="font-bold text-[#1a1412] text-base">CHEESE KEBAB</h3>
+                                <span class="text-xs text-gold-dark font-semibold">6 PCS</span>
+                            </div>
+                        </div>
+                        <span class="font-heading text-lg font-bold text-gold-dark">₹150/-</span>
+                    </div>
+
+                    <!-- Item 10 -->
+                    <div class="bg-white/80 border border-gold-dark/30 p-4 rounded-lg flex items-center justify-between shadow-md hover:border-gold transition-all">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=150&q=80" class="w-14 h-14 object-cover rounded border border-gold/40">
+                            <div>
+                                <h3 class="font-bold text-[#1a1412] text-base">MALAI KEBAB</h3>
+                                <span class="text-xs text-gold-dark font-semibold">6 PCS</span>
+                            </div>
+                        </div>
+                        <span class="font-heading text-lg font-bold text-gold-dark">₹150/-</span>
+                    </div>
+
+                    <!-- Item 11 -->
+                    <div class="bg-white/80 border border-gold-dark/30 p-4 rounded-lg flex items-center justify-between shadow-md hover:border-gold transition-all">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=150&q=80" class="w-14 h-14 object-cover rounded border border-gold/40">
+                            <div>
+                                <h3 class="font-bold text-[#1a1412] text-base">MALAI KEBAB (EXTRA MALAI)</h3>
+                                <span class="text-xs text-gold-dark font-semibold">6 PCS</span>
+                            </div>
+                        </div>
+                        <span class="font-heading text-lg font-bold text-gold-dark">₹170/-</span>
+                    </div>
+
+                    <!-- Item 12 -->
+                    <div class="bg-white/80 border border-gold-dark/30 p-4 rounded-lg flex items-center justify-between shadow-md hover:border-gold transition-all">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=150&q=80" class="w-14 h-14 object-cover rounded border border-gold/40">
+                            <div>
+                                <h3 class="font-bold text-[#1a1412] text-base">MALAI CHEESE KEBAB (EXTRA MALAI)</h3>
+                                <span class="text-xs text-gold-dark font-semibold">6 PCS</span>
+                            </div>
+                        </div>
+                        <span class="font-heading text-lg font-bold text-gold-dark">₹185/-</span>
+                    </div>
+
+                    <!-- Item 13 -->
+                    <div class="bg-white/80 border border-gold-dark/30 p-4 rounded-lg flex items-center justify-between shadow-md hover:border-gold transition-all">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=150&q=80" class="w-14 h-14 object-cover rounded border border-gold/40">
+                            <div>
+                                <h3 class="font-bold text-[#1a1412] text-base">GANDHORAJ KEBAB</h3>
+                                <span class="text-xs text-gold-dark font-semibold">6 PCS</span>
+                            </div>
+                        </div>
+                        <span class="font-heading text-lg font-bold text-gold-dark">₹150/-</span>
+                    </div>
+
+                    <!-- Item 14 -->
+                    <div class="bg-white/80 border border-gold-dark/30 p-4 rounded-lg flex items-center justify-between shadow-md hover:border-gold transition-all">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=150&q=80" class="w-14 h-14 object-cover rounded border border-gold/40">
+                            <div>
+                                <h3 class="font-bold text-[#1a1412] text-base">FISH KEBAB</h3>
+                                <span class="text-xs text-gold-dark font-semibold">5 PCS</span>
+                            </div>
+                        </div>
+                        <span class="font-heading text-lg font-bold text-gold-dark">₹180/-</span>
+                    </div>
+
+                    <!-- Item 15 -->
+                    <div class="bg-white/80 border border-gold-dark/30 p-4 rounded-lg flex items-center justify-between shadow-md hover:border-gold transition-all">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=150&q=80" class="w-14 h-14 object-cover rounded border border-gold/40">
+                            <div>
+                                <h3 class="font-bold text-[#1a1412] text-base">DILKHUSH KEBAB</h3>
+                                <span class="text-xs text-gold-dark font-semibold">1 PC</span>
+                            </div>
+                        </div>
+                        <span class="font-heading text-lg font-bold text-gold-dark">₹15/-</span>
+                    </div>
+
+                    <!-- Item 16 -->
+                    <div class="bg-white/80 border border-gold-dark/30 p-4 rounded-lg flex items-center justify-between shadow-md hover:border-gold transition-all">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=150&q=80" class="w-14 h-14 object-cover rounded border border-gold/40">
+                            <div>
+                                <h3 class="font-bold text-[#1a1412] text-base">SAMI KEBAB (CHICKEN)</h3>
+                                <span class="text-xs text-gold-dark font-semibold">1 PC</span>
+                            </div>
+                        </div>
+                        <span class="font-heading text-lg font-bold text-gold-dark">₹25/-</span>
+                    </div>
+
+                    <!-- Item 17 -->
+                    <div class="bg-white/80 border border-gold-dark/30 p-4 rounded-lg flex items-center justify-between shadow-md hover:border-gold transition-all">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=150&q=80" class="w-14 h-14 object-cover rounded border border-gold/40">
+                            <div>
+                                <h3 class="font-bold text-[#1a1412] text-base">SAMI KEBAB (MUTTON)</h3>
+                                <span class="text-xs text-gold-dark font-semibold">1 PC</span>
+                            </div>
+                        </div>
+                        <span class="font-heading text-lg font-bold text-gold-dark">₹95/-</span>
+                    </div>
+
+                    <!-- Item 18 -->
+                    <div class="bg-white/80 border border-gold-dark/30 p-4 rounded-lg flex items-center justify-between shadow-md hover:border-gold transition-all">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=150&q=80" class="w-14 h-14 object-cover rounded border border-gold/40">
+                            <div>
+                                <h3 class="font-bold text-[#1a1412] text-base">SANDWICH</h3>
+                                <span class="text-xs text-gold-dark font-semibold">1 PC</span>
+                            </div>
+                        </div>
+                        <span class="font-heading text-lg font-bold text-gold-dark">₹45/-</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- SEPARATE TANDOORI SECTION -->
+            <div class="mt-16 pt-8 border-t-2 border-gold-dark/40">
+                <div class="flex items-center gap-3 mb-8 border-b-2 border-gold-dark/40 pb-3">
+                    <span class="text-saffron text-xl">🔥</span>
+                    <h2 class="font-heading text-3xl font-bold text-[#2a1a08] tracking-wide">TANDOORI</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <!-- Tandoori 1 -->
+                    <div class="bg-white/90 border border-gold-dark/40 p-5 rounded-lg flex items-center justify-between shadow-md hover:border-gold transition-all">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=150&q=80" class="w-16 h-16 object-cover rounded border border-gold/40">
+                            <div>
+                                <h3 class="font-bold text-[#1a1412] text-base">DUMSTICK TANDOORI</h3>
+                                <span class="text-xs text-gold-dark font-semibold">1 PC</span>
+                            </div>
+                        </div>
+                        <span class="font-heading text-lg font-bold text-gold-dark">₹80/-</span>
+                    </div>
+
+                    <!-- Tandoori 2 -->
+                    <div class="bg-white/90 border border-gold-dark/40 p-5 rounded-lg flex items-center justify-between shadow-md hover:border-gold transition-all">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1527477396000-e27163b481c2?auto=format&fit=crop&w=150&q=80" class="w-16 h-16 object-cover rounded border border-gold/40">
+                            <div>
+                                <h3 class="font-bold text-[#1a1412] text-base">WINGS TANDOORI</h3>
+                                <span class="text-xs text-gold-dark font-semibold">1 PC</span>
+                            </div>
+                        </div>
+                        <span class="font-heading text-lg font-bold text-gold-dark">₹50/-</span>
+                    </div>
+
+                    <!-- Tandoori 3 -->
+                    <div class="bg-white/90 border border-gold-dark/40 p-5 rounded-lg flex items-center justify-between shadow-md hover:border-gold transition-all">
+                        <div class="flex items-center gap-4">
+                            <img src="assets/full-chicken-roast.jpg.jpg" onerror="this.onerror=null; this.src='assets/full-chicken-roast.jpg';" class="w-16 h-16 object-cover rounded border border-gold/40">
+                            <div>
+                                <h3 class="font-bold text-[#1a1412] text-base">FULL LEG TANDOORI</h3>
+                                <span class="text-xs text-gold-dark font-semibold">1 PC</span>
+                            </div>
+                        </div>
+                        <span class="font-heading text-lg font-bold text-gold-dark">₹170/-</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Back Button at Bottom -->
+            <div class="text-center mt-16">
+                <button onclick="closeFullMenu()" class="brown-back-button px-10 py-3.5 uppercase tracking-widest text-xs font-bold rounded-sm">
+                    Back to Home
+                </button>
+            </div>
+
+            <!-- Creator Details at the Very End of Menu Page -->
+            <div class="mt-20 pt-8 border-t border-gold-dark/20 text-center text-xs text-[#5c4433] space-y-1">
+                <p>Created by <strong class="text-gold-dark font-bold">Ando</strong></p>
+                <p>Email: <a href="mailto:aritrandohala@gmail.com" class="text-gold-dark hover:underline font-semibold">aritrandohala@gmail.com</a> | Instagram: <a href="https://www.instagram.com/haandi74?stkn=ZXR0cHprcmp1OTk1" target="_blank" class="text-gold-dark hover:underline font-semibold">@haandi74</a></p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ─── SCRIPT CONTROLS (SUBTLE 2D SLIDE TRANSITION) ─── -->
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+        // ─── POWERPOINT-STYLE SUBTLE 2D SLIDE TRANSITION ───
+        const slideOverlay = document.getElementById('slide-transition-overlay');
+
+        function trigger2DSlideTransition(onMidpoint) {
+            // Slide up to cover
+            slideOverlay.classList.add('active');
+
+            setTimeout(() => {
+                if (onMidpoint) onMidpoint();
+                
+                // Slide away after page content swaps
+                setTimeout(() => {
+                    slideOverlay.classList.remove('active');
+                }, 300);
+            }, 500);
+        }
+
+        // Open Dedicated Menu Page
+        function openFullMenu() {
+            trigger2DSlideTransition(() => {
+                const menuPage = document.getElementById('full-menu-page');
+                menuPage.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // Stop background scrolling
+            });
+        }
+
+        // Close Dedicated Menu Page
+        function closeFullMenu() {
+            trigger2DSlideTransition(() => {
+                const menuPage = document.getElementById('full-menu-page');
+                menuPage.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+        }
+    </script>
+</body>
+</html>
