@@ -177,6 +177,17 @@
             color: #b45309;
             text-shadow: 0 2px 10px rgba(217, 119, 6, 0.3);
         }
+
+        /* Dish Card Interactive Hover Hint */
+        .dish-card-clickable {
+            cursor: pointer;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+        .dish-card-clickable:hover {
+            transform: translateY(-6px);
+            border-color: rgba(251, 191, 36, 0.7);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(217, 119, 6, 0.3);
+        }
     </style>
 </head>
 <body class="bg-espresso text-ivory antialiased selection:bg-gold selection:text-espresso relative">
@@ -278,18 +289,19 @@
                     At <strong class="text-ivory font-normal">কাবাব ঘর (Kabab Ghor)</strong>, every dish carries centuries of secret recipes passed down through master grill ustads. We infuse authentic Bengali aromatics with classic Mughlai charcoal techniques to deliver a sensory feast that warms both palate and soul.
                 </p>
 
-                <div class="grid grid-cols-3 gap-6 pt-6 border-t border-gold/20">
-                    <div>
-                        <span class="font-heading text-3xl font-bold text-gold block">100%</span>
-                        <span class="text-xs uppercase tracking-wider text-ivory-muted">Authentic Spice</span>
+                <!-- FIXED: Responsive Grid (1 col on mobile, 3 cols on desktop) -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-gold/20">
+                    <div class="space-y-1">
+                        <span class="font-heading text-2xl sm:text-3xl font-bold text-gold block">100%</span>
+                        <span class="text-xs uppercase tracking-wider text-ivory-muted block">Authentic Spice</span>
                     </div>
-                    <div>
-                        <span class="font-heading text-3xl font-bold text-gold block">Charcoal</span>
-                        <span class="text-xs uppercase tracking-wider text-ivory-muted">Slow Grilled</span>
+                    <div class="space-y-1">
+                        <span class="font-heading text-2xl sm:text-3xl font-bold text-gold block">Charcoal</span>
+                        <span class="text-xs uppercase tracking-wider text-ivory-muted block">Slow Grilled</span>
                     </div>
-                    <div>
-                        <span class="font-heading text-3xl font-bold text-gold block">Royal</span>
-                        <span class="text-xs uppercase tracking-wider text-ivory-muted">Hospitality</span>
+                    <div class="space-y-1">
+                        <span class="font-heading text-2xl sm:text-3xl font-bold text-gold block">Royal</span>
+                        <span class="text-xs uppercase tracking-wider text-ivory-muted block">Hospitality</span>
                     </div>
                 </div>
             </div>
@@ -310,24 +322,25 @@
         </div>
     </section>
 
-    <!-- ─── SIGNATURE DISHES ─── -->
+    <!-- ─── SIGNATURE DISHES (CLICKABLE CARDS TO OPEN EXPANDED DISH MODAL) ─── -->
     <section id="specialties" class="relative z-10 py-24 px-6 md:px-16 bg-espresso/80 backdrop-blur-md border-y border-gold/20">
         <div class="max-w-6xl mx-auto">
             
             <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
                 <span class="text-gold text-xs uppercase tracking-[0.3em] font-semibold">House Favorites</span>
                 <h2 class="font-bengali text-4xl sm:text-5xl font-bold text-ivory">আমাদের সিগনেচার আইটেম</h2>
-                <p class="text-ivory-muted text-sm">handpicked delicacies marinated for 24 hours in aromatic spices and mustard oil</p>
+                <p class="text-ivory-muted text-sm">Tap on any dish to explore full ingredients, marination story, and flavor notes</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 
                 <!-- Card 1: Reshmi Malai Tikka (₹170) -->
-                <div class="bg-espresso-card/90 border border-gold/20 rounded-lg p-6 hover:border-gold/60 transition-all duration-300 group flex flex-col justify-between shadow-2xl backdrop-blur-md">
+                <div onclick="openDishModal('reshmi')" class="dish-card-clickable bg-espresso-card/90 border border-gold/20 rounded-lg p-6 group flex flex-col justify-between shadow-2xl backdrop-blur-md">
                     <div>
                         <div class="w-full h-48 rounded overflow-hidden mb-5 relative">
                             <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=600&q=80" alt="Reshmi Malai Tikka" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             <span class="absolute top-3 right-3 bg-gold text-espresso font-bold text-xs px-3 py-1 rounded uppercase tracking-wider">Popular</span>
+                            <span class="absolute bottom-3 left-3 bg-black/70 backdrop-blur-sm text-ivory text-[10px] px-2.5 py-1 rounded border border-gold/30">Tap to expand 🔍</span>
                         </div>
                         <div class="flex justify-between items-baseline mb-2">
                             <h3 class="font-bengali text-2xl font-semibold text-ivory group-hover:text-gold transition-colors">রেশমি মালাই টিক্কা</h3>
@@ -339,7 +352,7 @@
                 </div>
 
                 <!-- Card 2: Hariyali Kabab (₹150) -->
-                <div class="bg-espresso-card/90 border border-gold/20 rounded-lg p-6 hover:border-gold/60 transition-all duration-300 group flex flex-col justify-between shadow-2xl backdrop-blur-md">
+                <div onclick="openDishModal('hariyali')" class="dish-card-clickable bg-espresso-card/90 border border-gold/20 rounded-lg p-6 group flex flex-col justify-between shadow-2xl backdrop-blur-md">
                     <div>
                         <div class="w-full h-48 rounded overflow-hidden mb-5 relative">
                             <img src="assets/hariyali-kebab.jpg..jpg" 
@@ -347,6 +360,7 @@
                                  alt="Hariyali Kabab" 
                                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             <span class="absolute top-3 right-3 bg-saffron text-ivory font-bold text-xs px-3 py-1 rounded uppercase tracking-wider">Chef Special</span>
+                            <span class="absolute bottom-3 left-3 bg-black/70 backdrop-blur-sm text-ivory text-[10px] px-2.5 py-1 rounded border border-gold/30">Tap to expand 🔍</span>
                         </div>
                         <div class="flex justify-between items-baseline mb-2">
                             <h3 class="font-bengali text-2xl font-semibold text-ivory group-hover:text-gold transition-colors">হারিয়ালি কাবাব</h3>
@@ -358,7 +372,7 @@
                 </div>
 
                 <!-- Card 3: Full Chicken Roast (₹300) -->
-                <div class="bg-espresso-card/90 border border-gold/20 rounded-lg p-6 hover:border-gold/60 transition-all duration-300 group flex flex-col justify-between shadow-2xl backdrop-blur-md">
+                <div onclick="openDishModal('roast')" class="dish-card-clickable bg-espresso-card/90 border border-gold/20 rounded-lg p-6 group flex flex-col justify-between shadow-2xl backdrop-blur-md">
                     <div>
                         <div class="w-full h-48 rounded overflow-hidden mb-5 relative">
                             <img src="assets/full-chicken-roast.jpg.jpg" 
@@ -366,6 +380,7 @@
                                  alt="Full Chicken Roast" 
                                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             <span class="absolute top-3 right-3 bg-gold-dark text-ivory font-bold text-xs px-3 py-1 rounded uppercase tracking-wider">Royal Feast</span>
+                            <span class="absolute bottom-3 left-3 bg-black/70 backdrop-blur-sm text-ivory text-[10px] px-2.5 py-1 rounded border border-gold/30">Tap to expand 🔍</span>
                         </div>
                         <div class="flex justify-between items-baseline mb-2">
                             <h3 class="font-bengali text-2xl font-semibold text-ivory group-hover:text-gold transition-colors">সম্পূর্ণ চিকেন রোস্ট</h3>
@@ -388,7 +403,7 @@
         </div>
     </section>
 
-    <!-- ─── FOOTER WITH CREATOR ATTRIBUTION ─── -->
+    <!-- ─── FOOTER ─── -->
     <footer id="contact" class="relative z-10 bg-espresso/90 backdrop-blur-md border-t border-gold/20 pt-16 pb-8 px-6 md:px-16 text-ivory-muted text-xs">
         <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
             <div class="space-y-4 md:col-span-1">
@@ -428,6 +443,48 @@
             </div>
         </div>
     </footer>
+
+    <!-- ─── EXPANDED DISH DETAIL MODAL ─── -->
+    <div id="dish-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+        <div class="bg-espresso-card border border-gold/40 rounded-xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative overflow-hidden text-ivory space-y-6 max-h-[90vh] overflow-y-auto">
+            
+            <button onclick="closeDishModal()" class="absolute top-4 right-4 text-gold hover:text-ivory text-xl p-2 font-bold">✕</button>
+
+            <div class="flex flex-col sm:flex-row gap-6 items-center">
+                <img id="modal-dish-img" src="" class="w-full sm:w-48 h-48 object-cover rounded-lg border border-gold/30 shadow-lg">
+                <div class="space-y-2 text-center sm:text-left">
+                    <span id="modal-dish-tag" class="bg-gold text-espresso font-bold text-[10px] px-2.5 py-1 rounded uppercase tracking-wider inline-block"></span>
+                    <h3 id="modal-dish-title-bn" class="font-bengali text-3xl font-bold text-gold-light"></h3>
+                    <p id="modal-dish-title-en" class="text-xs uppercase tracking-widest text-ivory-muted font-mono"></p>
+                    <div class="pt-2 flex justify-center sm:justify-start items-center gap-4">
+                        <span id="modal-dish-price" class="font-heading text-2xl font-bold text-gold"></span>
+                        <span id="modal-dish-portion" class="text-xs text-ivory/80 bg-espresso border border-gold/30 px-3 py-1 rounded"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-4 border-t border-gold/20 pt-4">
+                <div>
+                    <h4 class="text-xs uppercase tracking-widest text-gold font-bold mb-1">Culinary Description</h4>
+                    <p id="modal-dish-desc" class="text-xs sm:text-sm text-ivory-muted leading-relaxed font-light"></p>
+                </div>
+
+                <div>
+                    <h4 class="text-xs uppercase tracking-widest text-gold font-bold mb-1">Key Aromatics & Ingredients</h4>
+                    <p id="modal-dish-ingredients" class="text-xs text-ivory/90 italic font-mono bg-espresso p-3 rounded border border-gold/20"></p>
+                </div>
+            </div>
+
+            <!-- "Check out more amazing choices" Callout Button -->
+            <div class="pt-4 border-t border-gold/20 text-center space-y-3">
+                <p class="text-xs italic text-gold-light">"Craving for more royal Mughlai & Bengali delicacies?"</p>
+                <button onclick="goToMenuFromModal()" class="w-full sm:w-auto luxury-button px-8 py-3 uppercase tracking-widest text-xs font-bold text-ivory rounded shadow-xl">
+                    Check out more amazing choices →
+                </button>
+            </div>
+
+        </div>
+    </div>
 
     <!-- ─── DEDICATED ROYAL MENU PAGE OVERLAY ─── -->
     <div id="full-menu-page" class="fixed inset-0 z-50 bg-[#fdfbf7] overflow-y-auto hidden text-espresso">
@@ -757,7 +814,7 @@
         </div>
     </div>
 
-    <!-- ─── SCRIPT CONTROLS (SUBTLE 2D SLIDE TRANSITION) ─── -->
+    <!-- ─── SCRIPT CONTROLS ─── -->
     <script>
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -769,17 +826,76 @@
 
         mobileMenuBtn.addEventListener('click', toggleMobileMenu);
 
+        // ─── EXPANDED DISH MODAL DATA & MECHANIC ───
+        const dishData = {
+            reshmi: {
+                tag: 'POPULAR CHOICE',
+                titleBn: 'রেশমি মালাই টিক্কা',
+                titleEn: 'Reshmi Malai Tikka',
+                price: '₹170',
+                portion: '6 Pieces',
+                img: 'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=600&q=80',
+                desc: 'Tender boneless chicken breasts steeped in a velvet 24-hour marination of cashews, heavy cream, white pepper, and royal Mughlai spices, charred over glowing charcoal coals.',
+                ingredients: 'Chicken breast, cashew cream, hung curd, white pepper, royal mace, ghee, lemon juice'
+            },
+            hariyali: {
+                tag: 'CHEF SPECIAL',
+                titleBn: 'হারিয়ালি কাবাব',
+                titleEn: 'Hariyali Mint Tikka',
+                price: '₹150',
+                portion: '6 Pieces',
+                img: 'assets/hariyali-kebab.jpg..jpg',
+                desc: 'Vibrant green chicken skewers infused with fresh garden mint, coriander, spicy green chillies, lemon zest, and toasted cumin, char-grilled in our clay tandoor oven.',
+                ingredients: 'Chicken chunks, fresh mint, coriander leaves, green chillies, strained yogurt, roasted cumin'
+            },
+            roast: {
+                tag: 'ROYAL FEAST',
+                titleBn: 'সম্পূর্ণ চিকেন রোস্ট',
+                titleEn: 'Full Whole Chicken Roast',
+                price: '৳ 300 / ₹300',
+                portion: 'Whole Chicken',
+                img: 'assets/full-chicken-roast.jpg.jpg',
+                desc: 'A grand feast featuring a whole chicken marinated in authentic Bengali mustard aromatics, Kashmiri red chili, garlic, and slow oven-roasted until crisp outside and juicy within.',
+                ingredients: 'Whole chicken, mustard oil, Kashmiri chili paste, ginger-garlic paste, nutmeg, mace'
+            }
+        };
+
+        function openDishModal(key) {
+            const data = dishData[key];
+            if (!data) return;
+
+            document.getElementById('modal-dish-img').src = data.img;
+            document.getElementById('modal-dish-tag').textContent = data.tag;
+            document.getElementById('modal-dish-title-bn').textContent = data.titleBn;
+            document.getElementById('modal-dish-title-en').textContent = data.titleEn;
+            document.getElementById('modal-dish-price').textContent = data.price;
+            document.getElementById('modal-dish-portion').textContent = data.portion;
+            document.getElementById('modal-dish-desc').textContent = data.desc;
+            document.getElementById('modal-dish-ingredients').textContent = data.ingredients;
+
+            document.getElementById('dish-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDishModal() {
+            document.getElementById('dish-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function goToMenuFromModal() {
+            closeDishModal();
+            openFullMenu();
+        }
+
         // ─── POWERPOINT-STYLE SUBTLE 2D SLIDE TRANSITION ───
         const slideOverlay = document.getElementById('slide-transition-overlay');
 
         function trigger2DSlideTransition(onMidpoint) {
-            // Slide up to cover
             slideOverlay.classList.add('active');
 
             setTimeout(() => {
                 if (onMidpoint) onMidpoint();
                 
-                // Slide away after page content swaps
                 setTimeout(() => {
                     slideOverlay.classList.remove('active');
                 }, 300);
@@ -791,7 +907,7 @@
             trigger2DSlideTransition(() => {
                 const menuPage = document.getElementById('full-menu-page');
                 menuPage.classList.remove('hidden');
-                document.body.style.overflow = 'hidden'; // Stop background scrolling
+                document.body.style.overflow = 'hidden';
             });
         }
 
